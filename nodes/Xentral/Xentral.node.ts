@@ -49,11 +49,38 @@ export class Xentral implements INodeType {
 		],
 
 		properties: [
+
+			// ----------------------------------
+			// 				DB Setting
+			// ----------------------------------
+			{
+				displayName: 'Datenbank wählen',
+				name: 'chooseDatabase',
+				type: 'boolean',
+				default: false,
+				description: 'Wählen, falls Xentral multiDB Option genutzt wird.'
+			},
+			{
+				displayName: 'Datenbankname',
+				name: 'databaseName',
+				type: 'string',
+				displayOptions: {
+					show: {
+						chooseDatabase: [
+							true,
+						],
+					},
+				},
+				required: true,
+				default: '',
+				description: 'Name der Datenbank.'
+			},
+
 			// ----------------------------------
 			// 				Resources
 			// ----------------------------------
 			{
-				displayName: 'Resource',
+				displayName: 'Ressource',
 				name: 'resource',
 				type: 'options',
 				options: [
@@ -88,14 +115,14 @@ export class Xentral implements INodeType {
 
 				],
 				default: 'order',
-				description: 'The resource to operate on.'
+				description: 'Die Ressource mit der gearbeitet wird.'
 			},
 
 			// ----------------------------------
 			// 				order
 			// ----------------------------------
 			{
-				displayName: 'Operation',
+				displayName: 'Vorgang',
 				name: 'operation',
 				type: 'options',
 				displayOptions: {
@@ -105,30 +132,30 @@ export class Xentral implements INodeType {
 				},
 				options: [
 					{
-						name: 'Create',
+						name: 'Erstellen',
 						value: 'create',
-						description: 'Create an order'
+						description: 'Auftrag erstellen.'
 					},
 					{
-						name: 'Update',
+						name: 'Aktualisieren',
 						value: 'update',
-						description: 'Update an order'
+						description: 'Auftrag aktualisieren.'
 					},
 					{
-						name: 'Get',
+						name: 'Abrufen',
 						value: 'get',
-						description: 'Get data of an order'
+						description: 'Auftrag abrufen.'
 					}
 				],
 				default: 'create',
-				description: 'The operation to perform.'
+				description: 'Der Vorgang, der ausgeführt werden soll.'
 			},
 
 			// ----------------------------------
 			//         order:create
 			// ----------------------------------
 			{
-				displayName: 'Data',
+				displayName: 'Daten',
 				name: 'data',
 				type: 'string',
 				displayOptions: {
@@ -139,14 +166,14 @@ export class Xentral implements INodeType {
 				},
 				default: '',
 				required: true,
-				description: 'Data of the order to create.'
+				description: 'Daten die übermittlet werden.'
 			},
 
 			// ----------------------------------
 			//         order:update
 			// ----------------------------------
 			{
-				displayName: 'Data',
+				displayName: 'Daten',
 				name: 'data',
 				type: 'string',
 				displayOptions: {
@@ -157,14 +184,14 @@ export class Xentral implements INodeType {
 				},
 				default: '',
 				required: true,
-				description: 'Data of the order to update.'
+				description: 'Daten die übermittlet werden.',
 			},
 
 			// ----------------------------------
 			//         order:get
 			// ----------------------------------
 			{
-				displayName: 'Data',
+				displayName: 'Daten',
 				name: 'data',
 				type: 'string',
 				displayOptions: {
@@ -175,14 +202,14 @@ export class Xentral implements INodeType {
 				},
 				default: '',
 				required: true,
-				description: 'Data of the order to create.'
+				description: 'Daten die übermittlet werden.'
 			},
 
 			// ----------------------------------
 			//         address
 			// ----------------------------------
 			{
-				displayName: 'Operation',
+				displayName: 'Vorgang',
 				name: 'operation',
 				type: 'options',
 				displayOptions: {
@@ -192,28 +219,28 @@ export class Xentral implements INodeType {
 				},
 				options: [
 					{
-						name: 'Create(v1)',
+						name: 'Anlegen(v1)',
 						value: 'create',
-						description: 'Create new address'
+						description: 'Adresse anlegen.'
 					},
 					{
-						name: 'Update(v1)',
+						name: 'Aktualisieren(v1)',
 						value: 'update',
-						description: 'Edit address'
+						description: 'Adresse aktualisieren.'
 					},
 					{
-						name: 'Get All(v2)',
+						name: 'Alle Abrufen(v2)',
 						value: 'getAll',
-						description: 'Call up the address list'
+						description: 'Alle Adressen abrufen.'
 					},
 					{
-						name: 'Get by ID(v2)',
+						name: 'Abrufen(v2)',
 						value: 'getById',
-						description: 'Get individual addresses'
+						description: 'Adresse abrufen.'
 					}
 				],
 				default: 'create',
-				description: 'Address options'
+				description: 'Der Vorgang, der ausgeführt werden soll.'
 			},
 
 			// ----------------------------------
@@ -231,18 +258,18 @@ export class Xentral implements INodeType {
 				},
 				default: 1,
 				required: true,
-				description: 'Address Id'
+				description: 'Adressen Id'
 			},
 
 			// ----------------------------------
 			//         address: getAll
 			// ----------------------------------
 			{
-				displayName: 'Query Parameter',
+				displayName: 'Abfrage Parameter',
 				name: 'queryParameters',
 				type: 'collection',
-				description: 'The query parameters to filter by.',
-				placeholder: 'Add Parameter',
+				description: 'Die Abfrage Parameter, nach denen gefiltert werden soll.',
+				placeholder: 'Parameter hinzufügen',
 				displayOptions: {
 					show: {
 						operation: ['getAll'],
@@ -581,7 +608,7 @@ export class Xentral implements INodeType {
 			// ----------------------------------
 
 			{
-				displayName: 'Data',
+				displayName: 'Daten',
 				name: 'data',
 				type: 'string',
 				displayOptions: {
@@ -592,7 +619,7 @@ export class Xentral implements INodeType {
 				},
 				default: '',
 				required: true,
-				description: 'Data of the address to create.'
+				description: 'Daten die übermittlet werden.'
 			},
 
 
@@ -611,10 +638,10 @@ export class Xentral implements INodeType {
 				},
 				default: 1,
 				required: true,
-				description: 'ID of the address to update.'
+				description: 'ID der zu aktualisierenden Adresse.'
 			},
 			{
-				displayName: 'Data',
+				displayName: 'Daten',
 				name: 'data',
 				type: 'string',
 				displayOptions: {
@@ -625,74 +652,36 @@ export class Xentral implements INodeType {
 				},
 				default: 1,
 				required: true,
-				description: 'Data of the address to update.'
+				description: 'Daten die übermittlet werden.'
 			},
 
 			// ----------------------------------
 			// 				belege
 			// ----------------------------------
-
-			// ----------------------------------
-			// 				rechnungen
-			// ----------------------------------
 			{
-				displayName: 'Operation',
+				displayName: 'Vorgang',
 				name: 'operation',
 				type: 'options',
 				displayOptions: {
 					show: {
-						resource: ['rechnungen']
+						resource: ['rechnungen', 'angebote', 'auftraege', 'lieferscheine', 'gutschriften']
 					}
 				},
 				options: [
 					{
-						name: 'Get All (v1)',
-						value: 'getAll',
-						description: 'Rechnungsliste abrufen'
-					},
-					{
-						name: 'Get by ID (v1)',
-						value: 'getById',
-						description: 'Einzelne Rechnung abrufen'
-					},/* 
-					{
-						name: 'Delete(v1)',
-						value: 'delete',
-						description: 'Einzelne Rechnung löschen'
-					}, */
-
-				],
-				default: 'getById',
-				description: 'Rechnungsoptionen'
-			},
-
-			// ----------------------------------
-			// 		belege (außer Rechnungen)
-			// ----------------------------------
-			{
-				displayName: 'Operation',
-				name: 'operation',
-				type: 'options',
-				displayOptions: {
-					show: {
-						resource: ['angebote', 'auftraege', 'lieferscheine', 'gutschriften']
-					}
-				},
-				options: [
-					{
-						name: 'Get All (v1)',
+						name: 'Alle abrufen',
 						value: 'getAll',
 						description: 'Belegliste abrufen'
 					},
 					{
-						name: 'Get by ID (v1)',
+						name: 'Abrufen',
 						value: 'getById',
 						description: 'Einzelnen Beleg abrufen'
 					},
 
 				],
 				default: 'getById',
-				description: 'Belegoptionen'
+				description: 'Der Vorgang, der ausgeführt werden soll.'
 			},
 
 			// ----------------------------------
@@ -704,20 +693,20 @@ export class Xentral implements INodeType {
 				type: 'number',
 				displayOptions: {
 					show: {
-						operation: ['getById'/* , 'delete' */],
+						operation: ['getById'],
 						resource: ['rechnungen', 'angebote', 'auftraege', 'lieferscheine', 'gutschriften']
 					}
 				},
 				default: 1,
 				required: true,
-				description: 'Rechnungs-ID'
+				description: 'Rechnungs ID'
 			},
 
 			// ----------------------------------
 			//         belege: getAll
 			// ----------------------------------
 			{
-				displayName: 'Query Parameters',
+				displayName: 'Abfrage Parameter',
 				name: 'queryParameters',
 				type: 'collection',
 				displayOptions: {
@@ -728,8 +717,8 @@ export class Xentral implements INodeType {
 				},
 				default: {},
 				required: false,
-				description: 'The query parameters to filter by',
-				placeholder: 'Add Parameter',
+				description: 'Die Abfrage Parameter, nach denen gefiltert werden soll.',
+				placeholder: 'Parameter hinzufügen',
 				options: [
 					{
 						displayName: 'Seitenzahl',
@@ -876,7 +865,7 @@ export class Xentral implements INodeType {
 						name: 'include',
 						type: 'string',
 						default: '',
-						description: 'Unter-Resourcen in Resource einbinden (Beispiel: include=positionen) Verfügbare Includes: positionen, protokoll'
+						description: 'Unter-Ressourcen in Ressource einbinden (Beispiel: include=positionen) Verfügbare Includes: positionen, protokoll'
 					},
 				]
 			}
