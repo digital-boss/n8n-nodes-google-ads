@@ -26,7 +26,7 @@ export async function xentralRequest(this: IHookFunctions | IExecuteFunctions, m
 
 	let headers = {};
 	if (this.getNodeParameter('chooseDatabase', 0) as boolean) {
-		headers = { 'multiDb': (this.getNodeParameter('databaseName', 0) as string) };
+		headers = { MultiDb: (this.getNodeParameter('databaseName', 0) as string) };
 	}
 
 	const options: OptionsWithUri = {
