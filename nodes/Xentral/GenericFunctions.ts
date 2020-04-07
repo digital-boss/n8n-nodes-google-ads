@@ -83,8 +83,13 @@ export async function xentralRequestOldApi(this: IHookFunctions | IExecuteFuncti
 		throw new Error('No credentials got returned!');
 	}
 
+	let headers = {};
+	if (this.getNodeParameter('chooseDatabase', 0) as boolean) {
+		headers = { MultiDb: (this.getNodeParameter('databaseName', 0) as string) };
+	}
+
 	const options: OptionsWithUri = {
-		headers: {},
+		headers: { ...headers },
 		method,
 		uri: `${credentials.url}${endpoint}`,
 		json: true,
