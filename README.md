@@ -33,7 +33,7 @@ node /var/www/vhosts/n8n/bin/n8n
 
 # Latest functionality
 
-Xentral endpoints include endpoints of old and new API as well as multiple databases.
+Xentral endpoints include endpoints of old and new API as well as the support for multiple databases.
 
 # Use
 
