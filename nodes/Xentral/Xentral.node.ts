@@ -975,9 +975,10 @@ export class Xentral implements INodeType {
 					requestMethod = 'POST';
 					endpoint = '/api/v1/adressen';
 
-					usesOldApi = false;
-
+					usesOldApi = true;
 					body = this.getNodeParameter('data', i) as IDataObject;
+					body = prepareBodyOldApi(body);
+					
 				} else if (operation === 'update') {
 					// ----------------------------------
 					//         update
@@ -986,9 +987,10 @@ export class Xentral implements INodeType {
 					const id = this.getNodeParameter('id', i) as number;
 					endpoint = `/api/v1/adressen/${id}`;
 
-					usesOldApi = false;
-
+					usesOldApi = true;
 					body = this.getNodeParameter('data', i) as IDataObject;
+					body = prepareBodyOldApi(body);
+					
 				}
 			} else if (resource === 'rechnungen') {
 				// ----------------------------------
