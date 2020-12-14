@@ -904,7 +904,7 @@ export class Xentral implements INodeType {
 					//         create
 					// ----------------------------------
 					requestMethod = 'POST';
-					endpoint = '/api/AuftragCreate';
+					endpoint = '/api/index.php/AuftragCreate';
 
 					usesOldApi = true;
 					body = {
@@ -916,7 +916,7 @@ export class Xentral implements INodeType {
 					//         update
 					// ----------------------------------
 					requestMethod = 'POST';
-					endpoint = '/api/AuftragEdit';
+					endpoint = '/api/index.php/AuftragEdit';
 
 					usesOldApi = true;
 
@@ -929,7 +929,7 @@ export class Xentral implements INodeType {
 					//         get
 					// ----------------------------------
 					requestMethod = 'POST';
-					endpoint = '/api/AuftragGet';
+					endpoint = '/api/index.php/AuftragGet';
 
 					usesOldApi = true;
 
