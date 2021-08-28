@@ -3,7 +3,7 @@
 Install it to the n8n root folder. This is the node_modules folder on the same level of n8n and n8n-core. This differs when you used the -g flag on n8n initial installation. From there do:
 
 ```
-npm install n8n-nodes-dnc-eventbrite
+npm install n8n-nodes-dnc-aws-secretsmanager
 ```
 
 # Fresh install n8n
@@ -19,7 +19,7 @@ npm init --yes
 
 npm install n8n
 
-npm install n8n-nodes-dnc-eventbrite
+npm install n8n-nodes-dnc-aws-secretsmanager
 ```
 
 # Start n8n
@@ -38,11 +38,7 @@ node /var/www/vhosts/n8n/bin/n8n
 
 # Latest functionality
 
-Eventbrite node includes Endpoints for Contacts, Custom Objects and Custom Object Data
-
-# Use
-
-Pass a data object.
+AWS Secret Manager node includes the GetSecretValue endpoint.
 
 # Contribution
 
@@ -50,7 +46,7 @@ To make this node even better, please let us know, [how you use it](mailto:info@
 
 # Issues
 
-If you have any issues, please [let us know on GitHub](https://github.com/quansenB/n8n-nodes-dnc-eventbrite/issues).
+If you have any issues, please [let us know on GitHub](https://github.com/quansenB/n8n-nodes-dnc-aws-secretsmanager/issues).
 
 # About
 
