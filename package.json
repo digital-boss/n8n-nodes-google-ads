@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-dnc-aws-secretsmanager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Iñaki Breinbauer",
   "license": "GPL-3.0",
   "description": "AWS Secrets Manager support for n8n",
