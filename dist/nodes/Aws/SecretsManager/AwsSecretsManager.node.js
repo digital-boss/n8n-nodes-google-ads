@@ -7,7 +7,7 @@ class AwsSecretsManager {
         this.description = {
             displayName: 'AWS Secrets Manager',
             name: 'awsSecretsManager',
-            icon: 'file:secrets-mananger.png',
+            icon: 'file:secrets-manager.png',
             group: ['output'],
             version: 1,
             subtitle: '={{$parameter["operation"]}}',
@@ -74,6 +74,18 @@ class AwsSecretsManager {
                         }
                     },
                     description: "Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you specify both this parameter and VersionId, the two parameters must refer to the same secret version . If you don't specify either a VersionStage or VersionId, then the default is to perform the operation on the version with the VersionStage value of AWSCURRENT."
+                },
+                {
+                    displayName: 'Decode JSON String',
+                    name: 'decode',
+                    type: 'boolean',
+                    default: true,
+                    displayOptions: {
+                        show: {
+                            operation: ['getSecretValue']
+                        }
+                    },
+                    description: "Option to decode the JSON String recieved from the API. Result is added to the Workflow data."
                 }
             ]
         };
@@ -104,6 +116,10 @@ class AwsSecretsManager {
                         'Accept-Encoding': 'identity',
                         'Content-Type': 'application/x-amz-json-1.1'
                     });
+                    const decode = this.getNodeParameter('decode', i);
+                    if (decode) {
+                        responseData.decodedValue = JSON.parse(responseData.SecretString);
+                    }
                 }
                 if (Array.isArray(responseData)) {
                     returnData.push.apply(returnData, responseData);
