@@ -59,7 +59,7 @@ export async function awsApiRequestREST(this: IHookFunctions | IExecuteFunctions
 	const response = await awsApiRequest.call(this, service, method, path, body, headers);
 	try {
 		return JSON.parse(response);
-	} catch (error: any) {
+	} catch (error) {
 		return response;
 	}
 }

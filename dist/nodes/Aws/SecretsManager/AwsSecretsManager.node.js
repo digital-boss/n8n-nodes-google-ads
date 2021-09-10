@@ -118,7 +118,7 @@ class AwsSecretsManager {
                     });
                     const decode = this.getNodeParameter('decode', i);
                     if (decode) {
-                        responseData.decodedValue = JSON.parse(responseData.SecretString);
+                        responseData.SecretString = JSON.parse(responseData.SecretString);
                     }
                 }
                 if (Array.isArray(responseData)) {
