@@ -1,9 +1,9 @@
 {
-  "name": "@digital-boss/n8n-nodes-aws-firehose",
-  "version": "1.1.0",
+  "name": "@digital-boss/n8n-nodes-google-ads",
+  "version": "0.0.1",
   "author": "Iñaki Breinbauer",
   "license": "GPL-3.0",
-  "description": "AWS Firehose support for n8n",
+  "description": "Google Ads support for n8n",
   "keywords": [
     "n8n",
     "nodemation",
@@ -11,13 +11,12 @@
     "digital north consulting",
     "nodes",
     "custom",
-    "AWS Firehose",
-    "workflow",
-    "crm"
+    "Google Ads",
+    "workflow"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quansenB/n8n-nodes-dnc-aws-firehose.git"
+    "url": "git+https://github.com/quansenB/n8n-nodes-google-ads.git"
   },
   "main": "index.js",
   "scripts": {
@@ -32,8 +31,11 @@
     "dist"
   ],
   "n8n": {
+    "credentials": [
+      "dist/credentials/GoogleAdsOAuth2Api.credentials.js"
+    ],
     "nodes": [
-      "dist/nodes/Aws/Firehose/AwsFirehose.node.js"
+      "dist/nodes/Google/Ads/GoogleAds.node.js"
     ]
   },
   "devDependencies": {
