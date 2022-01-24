@@ -32,7 +32,7 @@ export async function googleApiRequest(this: IExecuteFunctions | IExecuteSingleF
 		method,
 		body,
 		qs,
-		uri: uri || `https://adsreporting.googleapis.com${endpoint}`,
+		uri: uri || `https://googleads.googleapis.com/v9${endpoint}`,
 		json: true,
 	};
 
@@ -46,18 +46,22 @@ export async function googleApiRequest(this: IExecuteFunctions | IExecuteSingleF
 		}
 
 		if (authenticationMethod === 'serviceAccount') {
-			const credentials = await this.getCredentials('googleApi');
+			const credentials = await this.getCredentials('googleAdsApi');
 
 			if (credentials === undefined) {
 				throw new NodeOperationError(this.getNode(), 'No credentials got returned!');
 			}
 
 			const { access_token } = await getAccessToken.call(this, credentials as ICredentialDataDecryptedObject);
-
+			options.rejectUnauthorized = !credentials.allowUnauthorizedCerts;
+			options.headers!['developer-token'] = credentials.developerToken;
 			options.headers!.Authorization = `Bearer ${access_token}`;
 			//@ts-ignore
 			return await this.helpers.request(options);
-		} else {
+		} else if (authenticationMethod === 'oAuth2') {
+			const credentials = await this.getCredentials('googleAdsOAuth2');
+			options.rejectUnauthorized = !credentials!.allowUnauthorizedCerts;
+			options.headers!['developer-token'] = credentials!.developerToken;
 			//@ts-ignore
 			return await this.helpers.requestOAuth2.call(this, 'googleAdsOAuth2', options);
 		}

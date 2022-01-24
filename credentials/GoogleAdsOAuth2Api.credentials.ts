@@ -23,6 +23,12 @@ export class GoogleAdsOAuth2Api implements ICredentialType {
 			default: scopes.join(' '),
 		},
 		{
+			displayName: 'Developer Token',
+			name: 'developerToken',
+			type: 'string',
+			default: '',
+		},
+		{
 			displayName: 'Ignore SSL Issues',
 			name: 'allowUnauthorizedCerts',
 			type: 'boolean',

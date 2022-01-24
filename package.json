@@ -1,6 +1,6 @@
 {
   "name": "@digital-boss/n8n-nodes-google-ads",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Iñaki Breinbauer",
   "license": "GPL-3.0",
   "description": "Google Ads support for n8n",
@@ -32,7 +32,8 @@
   ],
   "n8n": {
     "credentials": [
-      "dist/credentials/GoogleAdsOAuth2Api.credentials.js"
+      "dist/credentials/GoogleAdsOAuth2Api.credentials.js",
+      "dist/credentials/GoogleAdsApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Google/Ads/GoogleAds.node.js"
