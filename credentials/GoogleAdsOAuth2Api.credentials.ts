@@ -7,9 +7,8 @@ const scopes = [
 	'https://www.googleapis.com/auth/adwords',
 ];
 
-
 export class GoogleAdsOAuth2Api implements ICredentialType {
-	name = 'googleAdsOAuth2';
+	name = 'googleAdsOAuth2Api';
 	extends = [
 		'googleOAuth2Api',
 	];
@@ -21,18 +20,6 @@ export class GoogleAdsOAuth2Api implements ICredentialType {
 			name: 'scope',
 			type: 'hidden',
 			default: scopes.join(' '),
-		},
-		{
-			displayName: 'Developer Token',
-			name: 'developerToken',
-			type: 'string',
-			default: '',
-		},
-		{
-			displayName: 'Ignore SSL Issues',
-			name: 'allowUnauthorizedCerts',
-			type: 'boolean',
-			default: false,
 		},
 	];
 }

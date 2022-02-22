@@ -1,6 +1,6 @@
 {
   "name": "@digital-boss/n8n-nodes-google-ads",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "Iñaki Breinbauer",
   "license": "GPL-3.0",
   "description": "Google Ads support for n8n",
@@ -32,34 +32,27 @@
   ],
   "n8n": {
     "credentials": [
-      "dist/credentials/GoogleAdsOAuth2Api.credentials.js",
-      "dist/credentials/GoogleAdsApi.credentials.js"
+      "dist/credentials/GoogleAdsOAuth2Api.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Google/Ads/GoogleAds.node.js"
+      "dist/nodes/Google/Ads/v1/AdsV1.node.js"
     ]
   },
   "devDependencies": {
-    "@types/aws4": "^1.11.0",
-    "@types/express": "^4.17.13",
-    "@types/jest": "^27.0.1",
-    "@types/jsonwebtoken": "^8.5.2",
+    "@types/express": "^4.17.6",
+    "@types/jest": "^26.0.13",
     "@types/node": "14.17.27",
-    "@types/request": "^2.48.7",
-    "@types/request-promise-native": "^1.0.18",
-    "gulp": "^4.0.2",
-    "jest": "^27.1.0",
-    "n8n-workflow": "~0.79.0",
-    "ts-jest": "^27.0.5",
-    "tslint": "^6.1.3",
-    "typescript": "~4.4.2"
+    "@types/request-promise-native": "~1.0.15",
+    "gulp": "^4.0.0",
+    "jest": "^26.4.2",
+    "n8n-workflow": "~0.86.0",
+    "nodelinter": "^0.1.9",
+    "ts-jest": "^26.3.0",
+    "tslint": "^6.1.2",
+    "typescript": "~4.3.5"
   },
   "dependencies": {
-    "@types/request": "^2.48.7",
-    "@types/request-promise-native": "^1.0.18",
-    "aws4": "^1.11.0",
-    "jsonwebtoken": "^8.5.1",
-    "n8n-core": "~0.96.0"
+    "n8n-core": "~0.104.0"
   },
   "jest": {
     "transform": {
