@@ -15,16 +15,11 @@ import {
 	simplify
 } from '../../../methods';
 
-export async function create(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
+export async function update(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
 	const customerId = this.getNodeParameter('customerId', index) as string;
 	const devToken = this.getNodeParameter('devToken', index) as string;
-	const name = this.getNodeParameter('name', index) as string;
-	const uploadKeyType = this.getNodeParameter('uploadKeyType', index) as string;
-	let appId;
-	if (uploadKeyType === 'MOBILE_ADVERTISING_ID') {
-		appId = this.getNodeParameter('app_id', index) as string;
-	}
-	const dataSourceType = this.getNodeParameter('dataSourceType', index) as IDataObject;
+	const userListResourceName = this.getNodeParameter('userListResourceName', index) as IDataObject;
+	const crmBasedUserList = this.getNodeParameter('userListFields', index) as IDataObject;
 	const additionalFields = this.getNodeParameter('additionalFields', index) as IDataObject;
 	const simplifyOutput = this.getNodeParameter('simplifyOutput', 0) as boolean;
 	const qs = {} as IDataObject;
@@ -36,20 +31,23 @@ export async function create(this: IExecuteFunctions, index: number): Promise<IN
 	} as IDataObject;
 
 	const userList: IDataObject = {
-		name,
-		crm_based_user_list: {
-			upload_key_type: uploadKeyType,
-			app_id: appId,
-			data_source_type: dataSourceType,
-		},
+		resourceName: userListResourceName,
+		crmBasedUserList,
 	};
+	Object.assign(userList, additionalFields);
+
+	const updateMask = Object.keys(userList)
+		.splice(Object.keys(userList).indexOf('resource_name'), 1) // remove resource_name from mask
+		.map(field => 'userList.' + field) // prepend 'user_list.'
+		.join(','); // merge in comma separated string
 
 	Object.assign(userList, additionalFields);
 
 	const form = {
 		operations: [
 			{
-				create: userList,
+				updateMask,
+				update: userList,
 			},
 		],
 	} as IDataObject;

@@ -15,7 +15,7 @@ export const userListDescription: UserListProperties = [
 			},
 		},
 		default: '',
-		description: 'The ID of the user list',
+		description: 'The resource name of the user list',
 	},
 	{
 		displayName: 'See <a href="https://developers.google.com/google-ads/api/rest/reference/rest/v9/UserIdentifier" target="_blank">Google Ads Guide</a> To User Identifiers',

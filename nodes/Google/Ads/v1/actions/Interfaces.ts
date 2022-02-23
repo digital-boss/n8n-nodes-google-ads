@@ -8,7 +8,7 @@ type CampaignMap = {
 	campaign: 'get' | 'getAll' | 'custom';
 };
 type UserListMap = {
-	userList: 'addUser' | 'create' | 'custom' |'get' | 'getAll' | 'removeUser';
+	userList: 'addUser' | 'create' | 'custom' | 'deleteOpr' | 'get' | 'getAll' | 'removeUser' | 'update';
 };
 
 export type Ads = AllEntities<CampaignMap | UserListMap>;
