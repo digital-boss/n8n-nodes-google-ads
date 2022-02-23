@@ -27,9 +27,7 @@ export const descriptions: INodeProperties[] = [
 		type: 'options',
 		displayOptions: {
 			show: {
-				resource: [
-					'userList',
-				],
+				resource: ['userList'],
 			},
 		},
 		options: [
@@ -84,18 +82,28 @@ export const descriptions: INodeProperties[] = [
 	...get.description,
 	...getAll.description,
 	...removeUser.description,
-	...update.description,
+	// ...update.description,
 
 	// TODO: make customer_id and devToken global (for all resources)
+	{
+		displayName: 'See <a href="https://developers.google.com/google-ads/api/docs/first-call/dev-token" target="_blank">Google Ads Guide</a> To Obtaining A Developer Token',
+		name: 'jsonNotice',
+		type: 'notice',
+		displayOptions: {
+			show: {
+				resource: ['userList'],
+			},
+		},
+		default: '',
+	},
 	{
 		displayName: 'Customer ID',
 		name: 'customerId',
 		type: 'string',
+		required: true,
 		displayOptions: {
 			show: {
-				resource: [
-					'userList',
-				],
+				resource: ['userList'],
 			},
 		},
 		default: '',
@@ -105,11 +113,10 @@ export const descriptions: INodeProperties[] = [
 		displayName: 'Developer Token',
 		name: 'devToken',
 		type: 'string',
+		required: true,
 		displayOptions: {
 			show: {
-				resource: [
-					'userList',
-				],
+				resource: ['userList'],
 			},
 		},
 		default: '',
