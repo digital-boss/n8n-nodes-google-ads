@@ -4,7 +4,7 @@ import {
 
 import {
 	IDataObject,
-	INodeExecutionData, NodeOperationError,
+	INodeExecutionData,
 } from 'n8n-workflow';
 
 import {
@@ -38,7 +38,7 @@ export async function update(this: IExecuteFunctions, index: number): Promise<IN
 
 	const updateMask = Object.keys(userList)
 		.splice(Object.keys(userList).indexOf('resource_name'), 1) // remove resource_name from mask
-		.map(field => 'userList.' + field) // prepend 'user_list.'
+		.map(field => 'user_list.' + field) // prepend 'user_list.'
 		.join(','); // merge in comma separated string
 
 	Object.assign(userList, additionalFields);

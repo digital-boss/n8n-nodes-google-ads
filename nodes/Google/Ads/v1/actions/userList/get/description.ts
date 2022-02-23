@@ -6,7 +6,10 @@ export const userListDescription: UserListProperties = [
 	{
 		displayName: 'User List ID',
 		name: 'userListId',
-		type: 'string',
+		type: 'options',
+		typeOptions: {
+			loadOptionsMethod: 'getUserListIds',
+		},
 		default: '',
 		required: true,
 		displayOptions: {

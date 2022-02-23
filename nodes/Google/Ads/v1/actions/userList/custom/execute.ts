@@ -28,10 +28,9 @@ export async function custom(this: IExecuteFunctions, index: number): Promise<IN
 		'login-customer-id': customerId,
 	} as IDataObject;
 
-	const
-		form = {
-			query: queryGQL,
-		};
+	const form = {
+		query: queryGQL,
+	};
 
 	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs, undefined, headers);
 

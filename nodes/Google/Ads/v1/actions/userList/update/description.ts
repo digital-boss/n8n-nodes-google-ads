@@ -7,7 +7,10 @@ export const userListDescription: UserListProperties = [
 		displayName: 'User List Resource Name',
 		name: 'userListResourceName',
 		required: true,
-		type: 'string',
+		type: 'options',
+		typeOptions: {
+			loadOptionsMethod: 'getUserListResourceNames',
+		},
 		displayOptions: {
 			show: {
 				resource: ['userList'],

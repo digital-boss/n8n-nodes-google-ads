@@ -4,7 +4,7 @@ import {
 
 import {
 	IDataObject,
-	INodeExecutionData, NodeOperationError,
+	INodeExecutionData,
 } from 'n8n-workflow';
 
 import {
