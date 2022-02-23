@@ -33,7 +33,7 @@ export async function apiRequest(this: IExecuteFunctions | IExecuteSingleFunctio
 		//@ts-ignore
 		return await this.helpers.requestOAuth2.call(this, 'googleAdsOAuth2Api', options);
 	} catch (error) {
-		if (error.response && error.response.body && error.response.body.error) {
+		if (error.response && error.response.body && error.response.body.error && error.response.body.error.errors) {
 
 			let errors = error.response.body.error.errors;
 
