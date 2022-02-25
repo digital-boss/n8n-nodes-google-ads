@@ -48,21 +48,17 @@ export async function getCampaigns(this: ILoadOptionsFunctions): Promise<INodePr
 
 // Get all the available user list IDs
 export async function getUserListIds(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const customerId = this.getNodeParameter('customerId', 0) as string;
-	const devToken = this.getNodeParameter('devToken', 0) as string;
+	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
+	const customerId = credentials.customerId as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
 	const endpoint = `customers/${customerId}/googleAds:search`;
-	const headers = {
-		'developer-token': devToken,
-		'login-customer-id': customerId,
-	} as IDataObject;
 
 	const form = {
 		query: `SELECT user_list.id FROM user_list ORDER BY user_list.id DESC`,
 	};
 
-	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs, undefined, headers);
+	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs);
 	responseData = simplify(responseData);
 
 	const reformattedResponseData = [];
@@ -88,21 +84,17 @@ export async function getUserListIds(this: ILoadOptionsFunctions): Promise<INode
 
 // Get all the available user list resource names
 export async function getUserListResourceNames(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const customerId = this.getNodeParameter('customerId', 0) as string;
-	const devToken = this.getNodeParameter('devToken', 0) as string;
+	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
+	const customerId = credentials.customerId as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
 	const endpoint = `customers/${customerId}/googleAds:search`;
-	const headers = {
-		'developer-token': devToken,
-		'login-customer-id': customerId,
-	} as IDataObject;
 
 	const form = {
 		query: `SELECT user_list.resource_name FROM user_list`,
 	};
 
-	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs, undefined, headers);
+	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs);
 	responseData = simplify(responseData);
 
 	const reformattedResponseData = [];
