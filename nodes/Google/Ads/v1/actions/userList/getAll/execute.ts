@@ -16,6 +16,7 @@ import {
 } from '../selectableFields';
 
 import {
+	mapObjectsToArray,
 	simplify
 } from '../../../methods';
 
@@ -44,6 +45,7 @@ export async function getAll(this: IExecuteFunctions, index: number): Promise<IN
 
 	if (simplifyOutput) {
 		responseData = simplify(responseData);
+		responseData = mapObjectsToArray(responseData);
 	}
 	return this.helpers.returnJsonArray(responseData);
 }
