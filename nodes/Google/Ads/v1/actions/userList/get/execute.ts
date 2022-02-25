@@ -13,12 +13,10 @@ import {
 } from '../../../transport';
 
 export async function get(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
-	const userListId = this.getNodeParameter('userListId', index) as string;
+	const userListResourceName = this.getNodeParameter('userListResourceName', index) as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'GET';
-	const endpoint = `customers/${customerId}/userLists/${userListId}`;
+	const endpoint = userListResourceName;
 
 	const responseData = await apiRequest.call(this, requestMethod, endpoint, undefined, qs);
 

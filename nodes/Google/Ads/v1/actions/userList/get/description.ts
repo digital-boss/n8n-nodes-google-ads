@@ -4,20 +4,20 @@ import {
 
 export const userListDescription: UserListProperties = [
 	{
-		displayName: 'User List ID',
-		name: 'userListId',
+		displayName: 'User List Resource Name',
+		name: 'userListResourceName',
+		required: true,
 		type: 'options',
 		typeOptions: {
-			loadOptionsMethod: 'getUserListIds',
+			loadOptionsMethod: 'getUserListResourceNames',
 		},
-		default: '',
-		required: true,
 		displayOptions: {
 			show: {
 				resource: ['userList'],
 				operation: ['get'],
 			},
 		},
-		description: 'The ID of the user list',
+		default: '',
+		description: 'The resource name of the user list',
 	},
 ];
