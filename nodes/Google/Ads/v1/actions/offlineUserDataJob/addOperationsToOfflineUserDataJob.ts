@@ -25,10 +25,10 @@ export async function addOperationsToOfflineUserDataJob(this: IExecuteFunctions,
 
 	const userIdentifiersArray: IDataObject[] = [];
 
+	const additionalFields = this.getNodeParameter('additionalFields', index) as IDataObject;
 	// add email as userIdentifier
-	const email = this.getNodeParameter('email', index) as IDataObject;
-	if (email.metadataValues !== undefined) {
-		const normalizedEmail = normalize((email.metadataValues as IDataObject).email as string);
+	if (additionalFields.email !== undefined) {
+		const normalizedEmail = normalize(additionalFields.email as string);
 
 		const hashedEmail = hash(normalizedEmail);
 
@@ -37,34 +37,31 @@ export async function addOperationsToOfflineUserDataJob(this: IExecuteFunctions,
 			hashedEmail,
 		});
 	}
-
 	// add phoneNumber as userIdentifier
-	const phoneNumber = this.getNodeParameter('phoneNumber', index) as IDataObject;
-	if (phoneNumber.metadataValues !== undefined) {
+	if (additionalFields.phoneNumber !== undefined) {
 
-		const hashedPhoneNumber = hash((phoneNumber.metadataValues as IDataObject).phoneNumber as string);
+		const hashedPhoneNumber = hash(additionalFields.phoneNumber as string);
 
 		userIdentifiersArray.push({
 			userIdentifierSource: 'UNSPECIFIED',
 			hashedPhoneNumber,
 		});
 	}
-
 	// add addressInfo as userIdentifier
-	const addressInfo = this.getNodeParameter('addressInfo', index) as IDataObject;
-	if (addressInfo.metadataValues !== undefined) {
+	if (additionalFields.addressInfo !== undefined) {
+		const addressInfo = (additionalFields.addressInfo as IDataObject).metadataValues as IDataObject;
 
-		const normalizedFirstName = normalize((addressInfo.metadataValues as IDataObject).firstName as string);
+		const normalizedFirstName = normalize(addressInfo.firstName as string);
 		const hashedFirstName = hash(normalizedFirstName);
 
-		const normalizedLastName = normalize((addressInfo.metadataValues as IDataObject).lastName as string);
+		const normalizedLastName = normalize(addressInfo.lastName as string);
 		const hashedLastName = hash(normalizedLastName);
 
 		const hashedAddressInfo = {
 			hashedFirstName,
 			hashedLastName,
-			countryCode: (addressInfo.metadataValues as IDataObject).countryCode,
-			postalCode: (addressInfo.metadataValues as IDataObject).postalCode,
+			countryCode: addressInfo.countryCode,
+			postalCode: addressInfo.postalCode,
 		};
 
 		userIdentifiersArray.push({
