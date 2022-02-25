@@ -1,6 +1,5 @@
 import * as addUser from './addUsers';
 import * as create from './create';
-import * as custom from './custom';
 import * as deleteOpr from './deleteOpr';
 import * as get from './get';
 import * as getAll from './getAll';
@@ -11,7 +10,6 @@ import { INodeProperties } from 'n8n-workflow';
 
 export {
 	addUser,
-	custom,
 	create,
 	deleteOpr,
 	get,
@@ -40,11 +38,6 @@ export const descriptions: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a user list',
-			},
-			{
-				name: 'Custom',
-				value: 'custom',
-				description: 'Custom query to be executed against the user list endpoint',
 			},
 			{
 				name: 'Delete',
@@ -77,7 +70,6 @@ export const descriptions: INodeProperties[] = [
 	},
 	...addUser.description,
 	...create.description,
-	...custom.description,
 	...deleteOpr.description,
 	...get.description,
 	...getAll.description,

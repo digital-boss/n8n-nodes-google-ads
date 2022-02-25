@@ -5,6 +5,7 @@ import {
 
 import * as campaign from './campaign';
 import * as userList from './userList';
+import * as search from './search';
 
 export const versionDescription: INodeTypeDescription = {
 	displayName: 'Google Ads',
@@ -40,11 +41,16 @@ export const versionDescription: INodeTypeDescription = {
 					name: 'User List',
 					value: 'userList',
 				},
+				{
+					name: 'Search',
+					value: 'search',
+				},
 			],
 			default: 'campaign',
 			description: 'The resource to operate on',
 		},
 		...campaign.descriptions,
 		...userList.descriptions,
+		...search.descriptions,
 	],
 };
