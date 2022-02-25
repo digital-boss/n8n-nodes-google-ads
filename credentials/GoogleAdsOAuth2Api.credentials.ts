@@ -21,5 +21,21 @@ export class GoogleAdsOAuth2Api implements ICredentialType {
 			type: 'hidden',
 			default: scopes.join(' '),
 		},
+		{
+			displayName: 'Customer ID',
+			name: 'customerId',
+			type: 'string',
+			required: true,
+			default: '',
+			description: 'Your Google Ads customer ID',
+		},
+		{
+			displayName: 'Developer Token',
+			name: 'devToken',
+			type: 'string',
+			required: true,
+			default: '',
+			description: 'Your Google Ads developer token',
+		},
 	];
 }

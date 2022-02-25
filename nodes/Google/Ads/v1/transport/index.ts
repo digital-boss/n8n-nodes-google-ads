@@ -13,9 +13,15 @@ import {
 } from 'n8n-workflow';
 
 export async function apiRequest(this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, method: string, endpoint: string, body: any = {}, qs: IDataObject = {}, uri?: string, headers: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
+	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
+	const customerId = credentials.customerId as string;
+	const devToken = credentials.devToken as string;
+
 	const options: OptionsWithUri = {
 		headers: {
 			'Content-Type': 'application/json',
+			'developer-token': devToken,
+			'login-customer-id': customerId,
 		},
 		method,
 		body,

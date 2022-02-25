@@ -16,8 +16,8 @@ import {
 } from '../../../methods';
 
 export async function update(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
-	const customerId = this.getNodeParameter('customerId', index) as string;
-	const devToken = this.getNodeParameter('devToken', index) as string;
+	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
+	const customerId = credentials.customerId as string;
 	const userListResourceName = this.getNodeParameter('userListResourceName', index) as IDataObject;
 	const crmBasedUserList = this.getNodeParameter('userListFields', index) as IDataObject;
 	const additionalFields = this.getNodeParameter('additionalFields', index) as IDataObject;
@@ -25,10 +25,6 @@ export async function update(this: IExecuteFunctions, index: number): Promise<IN
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
 	const endpoint = `customers/${customerId}/userLists:mutate`;
-	const headers = {
-		'developer-token': devToken,
-		'login-customer-id': customerId,
-	} as IDataObject;
 
 	const userList: IDataObject = {
 		resourceName: userListResourceName,
@@ -52,7 +48,7 @@ export async function update(this: IExecuteFunctions, index: number): Promise<IN
 		],
 	} as IDataObject;
 
-	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs, undefined, headers);
+	let responseData = await apiRequest.call(this, requestMethod, endpoint, form, qs);
 	if (simplifyOutput) {
 		responseData = simplify(responseData);
 	}

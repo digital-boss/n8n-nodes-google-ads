@@ -83,43 +83,4 @@ export const descriptions: INodeProperties[] = [
 	...getAll.description,
 	...removeUser.description,
 	// ...update.description,
-
-	// TODO: make customer_id and devToken global (for all resources)
-	{
-		displayName: 'See <a href="https://developers.google.com/google-ads/api/docs/first-call/dev-token" target="_blank">Google Ads Guide</a> To Obtaining A Developer Token',
-		name: 'jsonNotice',
-		type: 'notice',
-		displayOptions: {
-			show: {
-				resource: ['userList'],
-			},
-		},
-		default: '',
-	},
-	{
-		displayName: 'Customer ID',
-		name: 'customerId',
-		type: 'string',
-		required: true,
-		displayOptions: {
-			show: {
-				resource: ['userList'],
-			},
-		},
-		default: '',
-		description: 'Your Google Ads customer ID.',
-	},
-	{
-		displayName: 'Developer Token',
-		name: 'devToken',
-		type: 'string',
-		required: true,
-		displayOptions: {
-			show: {
-				resource: ['userList'],
-			},
-		},
-		default: '',
-		description: 'Your Google Ads developer token.',
-	},
 ];

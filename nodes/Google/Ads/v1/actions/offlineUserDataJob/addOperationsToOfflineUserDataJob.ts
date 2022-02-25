@@ -4,6 +4,7 @@ import {
 
 import {
 	IDataObject,
+	NodeOperationError,
 } from 'n8n-workflow';
 
 import {
@@ -18,16 +19,9 @@ import {
 export async function addOperationsToOfflineUserDataJob(this: IExecuteFunctions, index: number, resourceName: string, operation: string): Promise<IDataObject> {
 	// https://developers.google.com/google-ads/api/reference/rpc/v9/AddOfflineUserDataJobOperationsRequest
 
-	const customerId = this.getNodeParameter('customerId', index) as string;
-	const devToken = this.getNodeParameter('devToken', index) as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
 	const endpoint = `${resourceName}:addOperations`;
-
-	const headers = {
-		'developer-token': devToken,
-		'login-customer-id': customerId,
-	} as IDataObject;
 
 	const userIdentifiersArray: IDataObject[] = [];
 
@@ -101,8 +95,7 @@ export async function addOperationsToOfflineUserDataJob(this: IExecuteFunctions,
 			],
 		} as IDataObject;
 	} else {
-
+		throw new NodeOperationError(this.getNode(), 'Wrong OfflineUserDataJob operation!');
 	}
-
-	return await apiRequest.call(this, requestMethod, endpoint, form, qs, undefined, headers);
+	return await apiRequest.call(this, requestMethod, endpoint, form, qs);
 }
