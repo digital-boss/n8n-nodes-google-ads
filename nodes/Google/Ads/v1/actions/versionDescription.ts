@@ -33,10 +33,10 @@ export const versionDescription: INodeTypeDescription = {
 			name: 'resource',
 			type: 'options',
 			options: [
-				{
-					name: 'Campaign',
-					value: 'campaign',
-				},
+				// {
+				// 	name: 'Campaign',
+				// 	value: 'campaign',
+				// },
 				{
 					name: 'User List',
 					value: 'userList',
@@ -49,7 +49,7 @@ export const versionDescription: INodeTypeDescription = {
 			default: 'campaign',
 			description: 'The resource to operate on',
 		},
-		...campaign.descriptions,
+		// ...campaign.descriptions,
 		...userList.descriptions,
 		...search.descriptions,
 	],
