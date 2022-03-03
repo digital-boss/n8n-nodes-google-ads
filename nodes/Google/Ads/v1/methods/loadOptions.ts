@@ -13,9 +13,36 @@ import {
 	simplify
 } from './simplify';
 
+// List all the accessible customers
+export async function getAccessibleCustomers(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	// https://developers.google.com/google-ads/api/rest/auth
+
+	const endpoint = '/customers:listAccessibleCustomers';
+
+	const responseData = await apiRequest.call(this, 'GET', endpoint, {});
+
+	if (responseData === undefined) {
+		throw new NodeOperationError(this.getNode(), 'No data got returned');
+	}
+
+	const returnData: INodePropertyOptions[] = [];
+	for (const data of responseData.resourceNames) {
+		returnData.push({
+			name: data,
+			value: data,
+		});
+	}
+	returnData.sort((a, b) => {
+		if (a.name < b.name) { return -1; }
+		if (a.name > b.name) { return 1; }
+		return 0;
+	});
+	return returnData;
+}
+
 // Get all the available campaigns
 export async function getCampaigns(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const endpoint = 'channels';
+	const endpoint = '/channels';
 	const responseData = await apiRequest.call(this, 'GET', endpoint, {});
 
 	if (responseData === undefined) {
@@ -48,11 +75,12 @@ export async function getCampaigns(this: ILoadOptionsFunctions): Promise<INodePr
 
 // Get all the available user list IDs
 export async function getUserListIds(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
+	// https://developers.google.com/google-ads/api/rest/common/search
+
+	const customerId = this.getNodeParameter('customerId') as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/googleAds:search`;
+	const endpoint = `/${customerId}/googleAds:search`;
 
 	const form = {
 		query: `SELECT user_list.id FROM user_list ORDER BY user_list.id DESC`,
@@ -84,11 +112,12 @@ export async function getUserListIds(this: ILoadOptionsFunctions): Promise<INode
 
 // Get all the available user list resource names
 export async function getUserListResourceNames(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
+	// https://developers.google.com/google-ads/api/rest/common/search
+
+	const customerId = this.getNodeParameter('customerId') as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/googleAds:search`;
+	const endpoint = `/${customerId}/googleAds:search`;
 
 	const form = {
 		query: `SELECT user_list.resource_name FROM user_list`,

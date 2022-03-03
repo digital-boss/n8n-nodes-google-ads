@@ -21,7 +21,7 @@ export async function addOperationsToOfflineUserDataJob(this: IExecuteFunctions,
 
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `${resourceName}:addOperations`;
+	const endpoint = `/${resourceName}:addOperations`;
 
 	const userIdentifiersArray: IDataObject[] = [];
 

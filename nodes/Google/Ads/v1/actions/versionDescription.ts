@@ -29,6 +29,17 @@ export const versionDescription: INodeTypeDescription = {
 	],
 	properties: [
 		{
+			displayName: 'Customer ID',
+			name: 'customerId',
+			type: 'options',
+			typeOptions: {
+				loadOptionsMethod: 'getAccessibleCustomers',
+			},
+			required: true,
+			default: '',
+			description: 'The Google Ads customer ID of the account to which data is uploaded. Be sure to remove any hyphens (—), for example: 1234567890, not 123-456-7890.',
+		},
+		{
 			displayName: 'Resource',
 			name: 'resource',
 			type: 'options',

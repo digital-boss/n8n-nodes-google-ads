@@ -15,7 +15,7 @@ export async function runOfflineUserDataJob(this: IExecuteFunctions, index: numb
 
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `${resourceName}:run`;
+	const endpoint = `/${resourceName}:run`;
 
 	return await apiRequest.call(this, requestMethod, endpoint, undefined, qs);
 }

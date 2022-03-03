@@ -13,12 +13,11 @@ import {
 export async function createOfflineUserDataJob(this: IExecuteFunctions, index: number): Promise<IDataObject> {
 	// https://developers.google.com/google-ads/api/reference/rpc/v9/CreateOfflineUserDataJobRequest
 
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
+	const customerId = this.getNodeParameter('customerId', index) as string;
 	const userListResourceName = this.getNodeParameter('userListResourceName', index) as string;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/offlineUserDataJobs:create`;
+	const endpoint = `/${customerId}/offlineUserDataJobs:create`;
 
 	const form = {
 		job: {

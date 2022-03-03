@@ -21,13 +21,14 @@ import {
 } from '../../../methods';
 
 export async function getAll(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
+	// https://developers.google.com/google-ads/api/rest/common/search
+
+	const customerId = this.getNodeParameter('customerId', index) as string;
 	const returnAll = this.getNodeParameter('returnAll', 0) as boolean;
 	const simplifyOutput = this.getNodeParameter('simplifyOutput', 0) as boolean;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/googleAds:search`;
+	const endpoint = `/${customerId}/googleAds:search`;
 
 	let form: IDataObject;
 	if (returnAll) {

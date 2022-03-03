@@ -17,7 +17,7 @@ export async function getAll(this: IExecuteFunctions, index: number): Promise<IN
 	const limit = this.getNodeParameter('limit', 0, 0) as number;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/googleAds:search`;
+	const endpoint = `/customers/${customerId}/googleAds:search`;
 	const form = {
 		query: 'SELECT campaign.id, campaign.name FROM campaign ORDER BY campaign.id DESC',
 	} as IDataObject;

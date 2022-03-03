@@ -16,8 +16,9 @@ import {
 } from '../../../methods';
 
 export async function create(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
-	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
+	// https://developers.google.com/google-ads/api/rest/reference/rest/v9/customers.userLists/mutate
+
+	const customerId = this.getNodeParameter('customerId', index) as string;
 	const name = this.getNodeParameter('name', index) as string;
 	const uploadKeyType = this.getNodeParameter('uploadKeyType', index) as string;
 	let appId;
@@ -29,7 +30,7 @@ export async function create(this: IExecuteFunctions, index: number): Promise<IN
 	const simplifyOutput = this.getNodeParameter('simplifyOutput', 0) as boolean;
 	const qs = {} as IDataObject;
 	const requestMethod = 'POST';
-	const endpoint = `customers/${customerId}/userLists:mutate`;
+	const endpoint = `/${customerId}/userLists:mutate`;
 
 	const userList: IDataObject = {
 		name,

@@ -9,26 +9,36 @@ import {
 } from 'n8n-core';
 
 import {
-	IDataObject, NodeApiError,
+	IDataObject,
 } from 'n8n-workflow';
 
 export async function apiRequest(this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, method: string, endpoint: string, body: any = {}, qs: IDataObject = {}, uri?: string, headers: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
+	// https://developers.google.com/google-ads/api/rest/auth
+
 	const credentials = await this.getCredentials('googleAdsOAuth2Api') as IDataObject;
-	const customerId = credentials.customerId as string;
 	const devToken = credentials.devToken as string;
+	const loginCustomerId = credentials.loginCustomerId as string;
+	const linkedCustomerId = credentials.linkedCustomerId as string;
 
 	const options: OptionsWithUri = {
 		headers: {
 			'Content-Type': 'application/json',
 			'developer-token': devToken,
-			'login-customer-id': customerId,
 		},
 		method,
 		body,
 		qs,
-		uri: uri || `https://googleads.googleapis.com/v9/${endpoint}`,
+		uri: uri || `https://googleads.googleapis.com/v9${endpoint}`,
 		json: true,
 	};
+
+	if (loginCustomerId !== '') {
+		Object.assign(options.headers, {'login-customer-id': loginCustomerId});
+	}
+	if (linkedCustomerId !== '') {
+		Object.assign(options.headers, {'linked-customer-id': linkedCustomerId});
+	}
+
 	try {
 		if (Object.keys(headers).length !== 0) {
 			options.headers = Object.assign({}, options.headers, headers);
