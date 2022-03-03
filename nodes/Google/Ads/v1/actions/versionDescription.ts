@@ -37,7 +37,7 @@ export const versionDescription: INodeTypeDescription = {
 			},
 			required: true,
 			default: '',
-			description: 'The Google Ads customer ID of the account to which data is uploaded. Be sure to remove any hyphens (—), for example: 1234567890, not 123-456-7890.',
+			description: 'The Google Ads customer ID of the account',
 		},
 		{
 			displayName: 'Resource',
